@@ -1,5 +1,7 @@
 import express from 'express'
 import path from 'path'
+import ssr from './src/server'
+import template from './server/template'
 
 const app = express();
 
@@ -11,9 +13,14 @@ app.disable('x-powered-by');
 app.listen(process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
-  // const { preloadedState, content}  = ssr(initialState)
-  // const response = template("Server Rendered Page", preloadedState, content)
-  const response = '<!DOCTYPE html><html lang="zh-CN"><link rel="icon" href="https://g.csdnimg.cn/static/logo/favicon32.ico" type="image/x-icon" /></head><body>ssr</body></html>'
+  const { initState, content}  = ssr();
+  const response = template('ssr', initState, content);
+  res.setHeader('Cache-Control', 'assets, max-age=604800')
+  res.send(response);
+});
+
+app.get('/client', (req, res) => {
+  const response = template('csr');
   res.setHeader('Cache-Control', 'assets, max-age=604800')
   res.send(response);
 });
