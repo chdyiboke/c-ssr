@@ -8,12 +8,18 @@ app.use('/assets', express.static(path.resolve(__dirname, 'assets'))); // 当前
 // hide powered by express
 app.disable('x-powered-by');
 // start the server
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 3000);
 
 app.get('/', (req, res) => {
   // const { preloadedState, content}  = ssr(initialState)
   // const response = template("Server Rendered Page", preloadedState, content)
   const response = '<!DOCTYPE html><html lang="zh-CN"><link rel="icon" href="https://g.csdnimg.cn/static/logo/favicon32.ico" type="image/x-icon" /></head><body>ssr</body></html>'
+  res.setHeader('Cache-Control', 'assets, max-age=604800')
+  res.send(response);
+});
+
+app.get('/test', (req, res) => {
+  const response = '<!DOCTYPE html><html lang="zh-CN"><link rel="icon" href="https://g.csdnimg.cn/static/logo/favicon32.ico" type="image/x-icon" /></head><body>ssr-nodemon</body></html>'
   res.setHeader('Cache-Control', 'assets, max-age=604800')
   res.send(response);
 });

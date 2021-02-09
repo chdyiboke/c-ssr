@@ -4,6 +4,7 @@
   "description": "ssr demo",
   "main": "index.js",
   "scripts": {
+    "ssr": "nodemon index.js",
     "start": "yarn build && node index.js",
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +17,7 @@
   "dependencies": {
     "@babel/register": "^7.8.6",
     "express": "^4.17.1",
+    "nodemon": "^2.0.7",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
