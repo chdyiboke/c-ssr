@@ -10,6 +10,7 @@ export default function template(title, initialState = {}, content = "") {
     scripts = ` <script src="assets/bundle.js"> </script> `
   }
   
+  // 外联样式 用不着进行同构.使用插件 mini-css-extract-plugin 本质上就是将样式字符串从各组件中抽取出来，整合到一个样式文件中
   // <link rel="stylesheet" href="assets/style.css">
   let page = `<!DOCTYPE html>
   <html lang="en">

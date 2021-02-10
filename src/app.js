@@ -1,5 +1,9 @@
 import React from 'react'
 
 export default function App() {
-  return (<div>app</div>)
+  function test() {
+    console.error('test onclick');
+  }
+
+  return (<div onClick={test}>app</div>)
 }

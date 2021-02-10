@@ -30,3 +30,11 @@ app.get('/test', (req, res) => {
   res.setHeader('Cache-Control', 'assets, max-age=604800')
   res.send(response);
 });
+
+
+// app.get('/html', (req, res) => {
+//   // res.send('hello~!!');
+//   var index = fs.readFileSync('./public/index.html');
+//   var html = index.toString();
+//   res.send(html);
+// })
