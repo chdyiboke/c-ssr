@@ -1,9 +1,34 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchAppsIfNeeded } from './redux/actions'
+import Card from './cards/index'
+class App extends Component {
 
-export default function App() {
-  function test() {
-    console.error('test onclick');
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchAppsIfNeeded())
   }
 
-  return (<div onClick={test}>app</div>)
+
+  render() {
+    const { isFetching, apps } = this.props
+    const totalapps = apps && apps.length;
+
+    return (
+       <>
+         {isFetching && totalapps === 0 && <h2>Loading...</h2>}
+         {!isFetching && totalapps === 0 && <h2>Empty.</h2>}
+         <Card apps={apps} totalapps={totalapps} />
+       </>
+    );
+  }
 }
+ 
+function mapStateToProps({ isFetching, apps }) {
+  return {
+    isFetching,
+    apps
+  }
+}
+ 
+export default connect(mapStateToProps)(App)
